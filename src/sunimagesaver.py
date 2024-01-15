@@ -3,10 +3,9 @@ import json
 from io import BytesIO
 import aiohttp
 from PIL import Image
-from .config import VK_TOKEN
+from .config import VK_TOKEN, VK_GROUP_ID
 
 public_token = (VK_TOKEN)
-group_id = 168297205
 version = 5.131
 
 async def descriptor_image(image_content):
@@ -27,7 +26,7 @@ async def download_img_to_sun_userapi(image_content):
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get('https://api.vk.com/method/photos.getMessagesUploadServer',
-                                   params={'access_token': public_token, 'group_id': group_id, 'v': version}) as resp:
+                                   params={'access_token': public_token, 'group_id': VK_GROUP_ID, 'v': version}) as resp:
                 result = await resp.json()
                 server_url = result['response']['upload_url']
                 photo_bytes = await descriptor_image(image_content)

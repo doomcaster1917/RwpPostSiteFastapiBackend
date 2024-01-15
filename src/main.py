@@ -13,25 +13,6 @@ from .routers.Posts import posts_router
 from .routers.RegistrationRouter import registration_router
 from .routers.User import users_router
 
-# async def init_models():
-#     async with engine.begin() as conn:
-#         await conn.run_sync(models.Base.metadata.drop_all)
-#         await conn.run_sync(models.Base.metadata.create_all)
-#
-# event_loop = asyncio.get_event_loop()
-# asyncio.ensure_future(init_models(), loop=event_loop)
-
-# async def fill_models():
-#     # await TestingSQL.insertPosts()
-#     # await TestingSQL.insertUsers()
-#     # await TestingSQL.insertComments()
-#
-#
-#
-#
-# event_loop = asyncio.get_event_loop()
-# asyncio.ensure_future(fill_models(), loop=event_loop)
-
 app = FastAPI()
 app.include_router(users_router.router)
 app.include_router(registration_router.router)

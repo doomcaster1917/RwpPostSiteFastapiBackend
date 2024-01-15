@@ -1,7 +1,6 @@
 import uuid
 from fastapi import APIRouter, FastAPI, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from src.database import SessionLocal
 from ..User import crud_user
 
 from ..User import user_schemas

@@ -18,6 +18,7 @@ DB_PASS_TEST = os.environ.get("DB_PASS_TEST")
 
 SECRET_AUTH = os.environ.get("SECRET_AUTH")
 VK_TOKEN = os.environ.get("VK_TOKEN")
+VK_GROUP_ID = os.environ.get("VK_GROUP_ID")
 
 SMTP_USER = os.environ.get("SMTP_USER")
 SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD")
@@ -29,5 +30,5 @@ class JWTSettings(BaseModel):
     # authjwt_cookie_samesite: str = 'none'
     authjwt_cookie_secure: bool = False
     #jwt_refresh token expires 30 days by default
-    # Configure application to store and get JWT from cookies
-    # Disable CSRF Protection for this example. default is True
+    #Comment for deploy: Configure application to store and get JWT from cookies when deploy https and uncomment samesite conf
+    #string above.  disable CSRF Protection for this example. default is True

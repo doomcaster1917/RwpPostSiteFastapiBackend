@@ -2,7 +2,6 @@ from async_fastapi_jwt_auth import AuthJWT
 from fastapi import APIRouter
 from fastapi import Depends, Path
 from sqlalchemy.ext.asyncio import AsyncSession
-from src.database import SessionLocal
 from . import crud_admin
 from ..Middleware.Middleware import Middleware
 from ..User import user_schemas
