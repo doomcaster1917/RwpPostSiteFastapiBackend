@@ -31,7 +31,7 @@ async def authorizated_request(ac: AsyncClient, ulr: str, request_method: str, r
 
 async def test_registration(ac: AsyncClient, test_user_info: dict):
     myCmd = 'redis-cli flushall'
-    os.system(myCmd)
+    os.system(myCmd) # Cleanup redis-database via bash-command.
     response = await ac.post("/registration/", json=test_user_info)
     print(response.text)
     assert response.status_code == 200
