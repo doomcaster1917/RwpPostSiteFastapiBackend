@@ -20,7 +20,7 @@ class Middleware:
         await authorize.jwt_required()
         current_user_id = await authorize.get_jwt_subject()
         compared_ids = current_user_id == int(user_id)
-        if not compared_ids or not await crud_admin.check_is_admin(db, current_user_id):
+        if not compared_ids:
             raise HTTPException(status_code=403, detail="Wrong user_id")
         else:
             return True
