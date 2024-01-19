@@ -9,18 +9,21 @@ public_token = (VK_TOKEN)
 version = 5.131
 
 async def descriptor_image(image_content):
-    img = BytesIO(image_content)
-    data = Image.open(img, 'r')
+    try:
+        img = BytesIO(image_content)
+        data = Image.open(img, 'r')
 
 
-    finished_image_content = BytesIO()
-    data.save(finished_image_content, format='png')
-    finished_image_content.seek(0)
-    finished_image_content.name = (
-        '/home/barbus/Изображения/Снимки экрана/Снимок экрана от 2022-07-17 23-55-24.png'
-    )
+        finished_image_content = BytesIO()
+        data.save(finished_image_content, format='png')
+        finished_image_content.seek(0)
+        finished_image_content.name = (
+            '/home/barbus/Изображения/Снимки экрана/Снимок экрана от 2022-07-17 23-55-24.png'
+        )
 
-    return finished_image_content
+        return finished_image_content
+    except Exception as e:
+        raise e
 
 async def download_img_to_sun_userapi(image_content):
     try:
@@ -37,21 +40,24 @@ async def download_img_to_sun_userapi(image_content):
                                              'server': data['server'], 'hash': data['hash'], 'v': version})
                 return json.loads(await result.content.read())
     except Exception as e:
-        print(e)
+        raise e
 
 async def get_sun_userapi_url(image_content):
-    data = await download_img_to_sun_userapi(image_content)
-    items = data['response'][0]['sizes']
+    try:
+        data = await download_img_to_sun_userapi(image_content)
+        items = data['response'][0]['sizes']
 
-    sizes = []
-    for size in items:
-        sizes.append([size['height'], size['width']])
+        sizes = []
+        for size in items:
+            sizes.append([size['height'], size['width']])
 
-    max_size = max(sizes)
+        max_size = max(sizes)
 
-    url = ''
-    for item in items:
-        if item['height'] == max_size[0] and item['width'] == max_size[1]:
-            url = item['url']
+        url = ''
+        for item in items:
+            if item['height'] == max_size[0] and item['width'] == max_size[1]:
+                url = item['url']
 
-    return url
+        return url
+    except Exception as e:
+        raise e
